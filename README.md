@@ -7,5 +7,9 @@ I am taking Object-Oriented Data Structures this fall and I have created this re
 to post some of my most interesting assignments (coded in Java).
 
 Each directory contains each data structure's underlying files as well as a
-sub-directory named "testing".
+sub-directory named "testing", containing the cases we must design to
+ensure the validity of our structures.
+
+Index:
+1. assign2_stacksQueues: linked-list implementation of a stack and a queue.
 
