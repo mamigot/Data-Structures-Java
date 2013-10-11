@@ -1,6 +1,8 @@
 dataStructuresCS102
-NYU Fall 2013
+Object-Oriented Data Structures
 =====================
+ 
+ NYU Fall 2013
  
 I am taking Object-Oriented Data Structures this fall and I have created this repo
 to post some of my most interesting assignments (coded in Java).
