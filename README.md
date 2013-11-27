@@ -20,4 +20,11 @@ Index:
         "StackListNode.java" and "QueueListNode.java".
         
         b. "BalanceCheck.java" uses the stack to ensure that provided strings are "balanced" (meaning that for every opening character stored in the hash-table within the file there is a closing character).
+        
+
+2. assign5_skipLists: 
+
+        a. "SkiplistMap.java" implements a skip-list through put(), get() and remove() methods; calculateStats() and its helper methods provide statistics through which the O(logN) behavior of the data structure is analyzed. New nodes are created through "SkiplistMapNode.java".
+        
+        b. An iterator, called through the main class's iterator() method, is constructed from "SkiplistMapIterator.java".
 
