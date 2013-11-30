@@ -10,9 +10,9 @@
  * Lecturers: Eric Koskinen and Daniel Schwartz-Narbonne<br>
  * ***********************************************************************
  *
- * @author      Eric Koskinen <ejk@cs.nyu.edu>
- * @version     $Revision$
- * @since       2013-11-08
+ * @author      Miguel Amigot <ma2786@nyu.edu>
+ * @version     Assignment 6
+ * @since       2013-11-30
  */
 
 import java.util.ArrayList;
@@ -36,8 +36,6 @@ public class Graph<T, L> {
      * Return null if no such node exists.
      */
     public Node<T,L> findNode(T lab) {
-    	//CHECK: what happens if lab is null
-
     	//look for it in the hashmap    	
     	Node<T,L> gotten = nodes.get(lab);
     	if(gotten != null) return gotten;
@@ -163,7 +161,6 @@ public class Graph<T, L> {
     	Collection<Node<T, L>> collection = nodes.values();
     	//get an iterator for the collection
     	Iterator<Node<T,L>> it = collection.iterator();
-    	//go through the iterator and add each node to the arraylist
     	while(it.hasNext()){
     		sb.append(it.next().toStringWithEdges());
     	}
