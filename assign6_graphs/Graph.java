@@ -22,12 +22,11 @@ import java.util.List;
 
 public class Graph<T, L> {
 
-    // Add private data here.
+	//hashmap from labels to nodes
+	HashMap<T,Node<T,L>> nodes;
 
     public Graph() {
-
-	// Implement.
-
+    	nodes = new HashMap<T,Node<T,L>>();
     }
 
     /** 
@@ -35,10 +34,12 @@ public class Graph<T, L> {
      * Return null if no such node exists.
      */
     public Node<T,L> findNode(T lab) {
-		return null;
+    	//CHECK: what happens if lab is null
 
-	// Implement.
-
+    	//look for it in the hashmap    	
+    	Node<T,L> gotten = nodes.get(lab);
+    	if(gotten != null) return gotten;
+    	else return null;
     }
 
     /** 
@@ -47,10 +48,14 @@ public class Graph<T, L> {
      * this method throws an {@link InvalidOperationException}.
      */
     public Node<T,L> addNode(T lab) throws InvalidOperationException {
-		return null;
-
-	// Implement.
-
+    	//Check if the node already exists
+    	if(findNode(lab) != null) throw new InvalidOperationException("This node is already in the graph.");
+    	
+    	//If not, construct it and put it in the hashmap
+    	Node<T,L> newGuy = new Node<T,L>(lab);
+    	
+    	//put the node in the hashmap and return it
+		return nodes.put(lab, newGuy);
     }
 
 
@@ -58,6 +63,7 @@ public class Graph<T, L> {
      * Return a list of all of the nodes in the Graph.
      */
     public List<Node<T,L>> getNodes() {
+    	
 		return null;
 
 	// Implement.
