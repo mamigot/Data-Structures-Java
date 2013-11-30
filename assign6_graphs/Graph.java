@@ -160,12 +160,19 @@ public class Graph<T, L> {
      * Display the graph as in the Assignment description
      */
     public String toString() {
-		return null;
-
-	// Implement.
-
-	// Hint: You may want to use a StringBuilder object
-	// to assemble a string from all of the nodes.
+    	
+    	StringBuilder sb = new StringBuilder();
+    	
+    	//get an iterator to go through the elements of the hashmap
+    	Collection<Node<T, L>> collection = nodes.values();
+    	//get an iterator for the collection
+    	Iterator<Node<T,L>> it = collection.iterator();
+    	//go through the iterator and add each node to the arraylist
+    	while(it.hasNext()){
+    		sb.append(it.next().toStringWithEdges());
+    	}
+    	
+		return sb.toString();
 
     }
 }
