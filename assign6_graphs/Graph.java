@@ -57,7 +57,8 @@ public class Graph<T, L> {
     	Node<T,L> newGuy = new Node<T,L>(lab);
     	
     	//put the node in the hashmap and return it
-		return nodes.put(lab, newGuy);
+    	nodes.put(lab, newGuy);
+		return newGuy;
     }
 
 
@@ -76,11 +77,6 @@ public class Graph<T, L> {
     	while(it.hasNext()){
     		nodesList.add(it.next());
     	}
-    	
-    	
-    	//ERROR check------------
-    	if(it.hasNext()) System.out.println("BAD! the iterator still has something!!!!");
-    	//if needed, debug!
     	
 		return nodesList;
     }
@@ -109,7 +105,7 @@ public class Graph<T, L> {
     	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
     	
     	//the new edge is an outbound arc from the TAIL to the HEAD
-    	tail.addOutArc(newEdge);
+    	head.addOutArc(newEdge);
     	
 		return newEdge;
     }
@@ -131,7 +127,7 @@ public class Graph<T, L> {
     	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
     	
     	//the new edge is an outbound arc from the TAIL to the HEAD
-    	tail.addOutArc(newEdge);
+    	head.addOutArc(newEdge);
     	
 		return newEdge;
     }
@@ -141,15 +137,15 @@ public class Graph<T, L> {
      */
     public void addBiEdge(T n, L l, T m) throws InvalidOperationException {
     	//retreive the appropriate nodes from the hashmap
-    	Node<T,L> one = findNode(n);
-    	Node<T,L> two = findNode(m);
+    	Node<T,L> one = findNode(m);
+    	Node<T,L> two = findNode(n);
     	
     	//neither "n" nor "m" may be null
     	if((one == null) || (two == null)) throw new InvalidOperationException("Both tail and head node labels must exist");
     	
     	//construct two edges to link nodes "one" and "two"
-    	Edge<T,L> fromOne = new Edge<T,L>(l, two, one);
-    	Edge<T,L> fromTwo = new Edge<T,L>(l, one, two);
+    	Edge<T,L> fromOne = new Edge<T,L>(l, one, two);
+    	Edge<T,L> fromTwo = new Edge<T,L>(l, two, one);
     	
     	//add them to their respective instantiations
     	one.addOutArc(fromOne);
