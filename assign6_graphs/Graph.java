@@ -16,7 +16,9 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -63,13 +65,24 @@ public class Graph<T, L> {
      * Return a list of all of the nodes in the Graph.
      */
     public List<Node<T,L>> getNodes() {
+    	//arraylist that will be populated through the iterator and returned
+    	ArrayList<Node<T,L>> nodesList = new ArrayList<Node<T,L>>();
     	
-		return null;
-
-	// Implement.
-
-	// Hint: Use an ArrayList
-
+    	//use an iterator for the hashmap
+    	Collection<Node<T, L>> collection = nodes.values();
+    	//get an iterator for the collection
+    	Iterator<Node<T,L>> it = collection.iterator();
+    	//go through the iterator and add each node to the arraylist
+    	while(it.hasNext()){
+    		nodesList.add(it.next());
+    	}
+    	
+    	
+    	//ERROR check------------
+    	if(it.hasNext()) System.out.println("BAD! the iterator still has something!!!!");
+    	//if needed, debug!
+    	
+		return nodesList;
     }
 
     /** 
@@ -85,30 +98,62 @@ public class Graph<T, L> {
      * doesn't already exist.
      */
     public Edge<T,L> addEdge(T n, L l, T m) throws InvalidOperationException {
-		return null;
-
-	// Implement.
-
+    	//retreive the appropriate nodes from the hashmap
+    	Node<T,L> head = findNode(n);
+    	Node<T,L> tail = findNode(m);
+    	
+    	//neither "n" nor "m" may be null
+    	if((head == null) || (tail == null)) throw new InvalidOperationException("Both tail and head node labels must exist");
+    
+    	//construct the edge from the TAIL to the HEAD
+    	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
+    	
+    	//the new edge is an outbound arc from the TAIL to the HEAD
+    	tail.addOutArc(newEdge);
+    	
+		return newEdge;
     }
 
     /** 
      * Variant of {@link addEdge} in which the Nodes are specified
      * rather than node labels.
+     * @throws InvalidOperationException
      */
-    public Edge<T,L> addEdge(Node<T,L> N, L l, Node<T,L> M) {
-		return null;
-
-	// Implement.
-
+    public Edge<T,L> addEdge(Node<T,L> N, L l, Node<T,L> M) throws InvalidOperationException {
+    	//neither "N" nor "M" may be null
+    	if((N == null) || (M == null)) throw new InvalidOperationException("Both tail and head nodes must exist");
+    	
+    	//rename parameters to facilitate reading
+    	Node<T,L> head = N;
+    	Node<T,L> tail = M;
+    	
+    	//construct the edge from the TAIL to the HEAD
+    	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
+    	
+    	//the new edge is an outbound arc from the TAIL to the HEAD
+    	tail.addOutArc(newEdge);
+    	
+		return newEdge;
     }
 
     /** 
      * Add an edge from n to m, as well as an edge from m to n.
      */
     public void addBiEdge(T n, L l, T m) throws InvalidOperationException {
-
-	// Implement.
-
+    	//retreive the appropriate nodes from the hashmap
+    	Node<T,L> one = findNode(n);
+    	Node<T,L> two = findNode(m);
+    	
+    	//neither "n" nor "m" may be null
+    	if((one == null) || (two == null)) throw new InvalidOperationException("Both tail and head node labels must exist");
+    	
+    	//construct two edges to link nodes "one" and "two"
+    	Edge<T,L> fromOne = new Edge<T,L>(l, two, one);
+    	Edge<T,L> fromTwo = new Edge<T,L>(l, one, two);
+    	
+    	//add them to their respective instantiations
+    	one.addOutArc(fromOne);
+    	two.addOutArc(fromTwo);
     }
 
     /** 
