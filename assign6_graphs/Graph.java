@@ -48,6 +48,9 @@ public class Graph<T, L> {
      * this method throws an {@link InvalidOperationException}.
      */
     public Node<T,L> addNode(T lab) throws InvalidOperationException {
+    	//label cannot be null
+    	if(lab == null) throw new InvalidOperationException("Can't add a 'null' node.");
+    	
     	//Check if the node already exists
     	if(findNode(lab) != null) throw new InvalidOperationException("This node is already in the graph.");
     	
@@ -98,11 +101,14 @@ public class Graph<T, L> {
     	
     	//neither "n" nor "m" may be null
     	if((head == null) || (tail == null)) throw new InvalidOperationException("Both tail and head node labels must exist");
+    	//label cannot be null
+    	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
     
     	//construct the edge from the TAIL to the HEAD
     	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
     	
     	//the new edge is an outbound arc from the TAIL to the HEAD
+    	//the naming is unorganized in the Edge class but this implementation is correct 
     	head.addOutArc(newEdge);
     	
 		return newEdge;
@@ -116,6 +122,8 @@ public class Graph<T, L> {
     public Edge<T,L> addEdge(Node<T,L> N, L l, Node<T,L> M) throws InvalidOperationException {
     	//neither "N" nor "M" may be null
     	if((N == null) || (M == null)) throw new InvalidOperationException("Both tail and head nodes must exist");
+    	//label cannot be null
+    	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
     	
     	//rename parameters to facilitate reading
     	Node<T,L> head = N;
@@ -140,6 +148,8 @@ public class Graph<T, L> {
     	
     	//neither "n" nor "m" may be null
     	if((one == null) || (two == null)) throw new InvalidOperationException("Both tail and head node labels must exist");
+    	//label cannot be null
+    	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
     	
     	//construct two edges to link nodes "one" and "two"
     	Edge<T,L> fromOne = new Edge<T,L>(l, one, two);
