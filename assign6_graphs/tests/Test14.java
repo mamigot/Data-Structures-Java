@@ -1,7 +1,7 @@
 /**
  * Test14 -- test class extending {@link TestHarness}
  * <p>
- * Tests the addBiEdge(T n, L l, T m) method by inputting data and analyzing
+ * Tests the addBiEdge(T n, L l, T m) method by inputting standard data and analyzing
  * it through the getNodes() method.
  * ***********************************************************************<br>
  * Computer Science 102: Data Structures<br>
@@ -22,37 +22,55 @@ public class Test14 extends TestHarness {
     public Test14(String s) { super(s); }
 
     public boolean test() {
-    	Graph<Character,Integer> g = new Graph<Character,Integer>();
+    	Graph<String,Integer> g = new Graph<String,Integer>();
+    	try {
+			g.addNode("a");
+			g.addNode("b");
+			g.addNode("c");
+		} catch (InvalidOperationException e) {
+			//shouldn't throw an exception
+			return false;
+		}
     	
-    	//add a myriad of nodes
-    	int count = 0;
-    	int start = 32;
-    	int end = 123;
-    	//create a list where all relevant characters will be stored
-    	List<Character> charList = new ArrayList<Character>();
-    	try{
-    		for(int i=start; i<end; i++){
-    			g.addNode((char) i);
-    			charList.add((char) i);
-    			count++;
-    		}
-    	}catch(InvalidOperationException e){
-    		//Shouldn't have thrown an exception here
-    		return false;
-    	}
+    	boolean one = false;
+    	boolean two = false;
+    	boolean three = false;
     	
-    	List<Node<Character,Integer>> list = g.getNodes();
-    	boolean countTest = list.size() == count;
+    	try {
+			g.addBiEdge("a", 22, "b");
+			one = true;
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("First exception incorrectly thrown.");
+			one = false;
+		}
     	
-    	//checks that all of the elements that were inserted in the graph
-    	//are in the charList
-    	boolean presentTest = true;
-    	for(Node<Character, Integer> Node: list){
-    		if(!charList.contains(Node.getLabel())) presentTest = false; 
-    	}
+    	try {
+			g.addBiEdge("c", 22, "b");
+			two = true;
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Second exception incorrectly thrown.");
+			two = false;
+		}
     	
-    	System.out.println("Added "+count+" elements.");
-    	return countTest && presentTest;
+    	try {
+			g.addBiEdge("a", 22, "c");
+			three = true;
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Third exception incorrectly thrown.");
+			three = false;
+		}
+    	
+    	//the word "edge" may not show up in the string, since we've inserted no edges
+    	boolean strAnalysis = false;
+    	String graph = g.toString();
+    	String[] gr = graph.split("Edge");
+    	if(gr.length == 7) strAnalysis = true;
+    	System.out.println(gr.length-1+" edges have been inserted.");
+    	
+    	return one && two && three && strAnalysis;
     }
 
 }

@@ -1,8 +1,8 @@
 /**
  * Test13 -- test class extending {@link TestHarness}
  * <p>
- * Tests the addEdge(Node<T,L> N, L l, Node<T,L> M) method by inputting data and analyzing
- * it through the getNodes() method.
+ * Tests the addEdge(Node<T,L> N, L l, Node<T,L> M) method by inputting standard data and analyzing
+ * it through the toString() method.
  * ***********************************************************************<br>
  * Computer Science 102: Data Structures<br>
  * New York University, Fall 2013,<br>
@@ -22,37 +22,57 @@ public class Test13 extends TestHarness {
     public Test13(String s) { super(s); }
 
     public boolean test() {
-    	Graph<Character,Integer> g = new Graph<Character,Integer>();
+    	Graph<String,Integer> g = new Graph<String,Integer>();
     	
-    	//add a myriad of nodes
-    	int count = 0;
-    	int start = 32;
-    	int end = 123;
-    	//create a list where all relevant characters will be stored
-    	List<Character> charList = new ArrayList<Character>();
-    	try{
-    		for(int i=start; i<end; i++){
-    			g.addNode((char) i);
-    			charList.add((char) i);
-    			count++;
-    		}
-    	}catch(InvalidOperationException e){
-    		//Shouldn't have thrown an exception here
-    		return false;
-    	}
+		Node<String,Integer> a = new Node<String,Integer>("a");
+		Node<String,Integer> b = new Node<String,Integer>("b");
+		Node<String,Integer> c = new Node<String,Integer>("c");
+		
+    	boolean one = false;
+    	boolean two = false;
+    	boolean three = false;
     	
-    	List<Node<Character,Integer>> list = g.getNodes();
-    	boolean countTest = list.size() == count;
+    	try {
+			g.addEdge(a, 22, b);
+			one = true;
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("First exception incorrectly thrown.");
+			e.printStackTrace();
+			one = false;
+		}
     	
-    	//checks that all of the elements that were inserted in the graph
-    	//are in the charList
-    	boolean presentTest = true;
-    	for(Node<Character, Integer> Node: list){
-    		if(!charList.contains(Node.getLabel())) presentTest = false; 
-    	}
+    	try {
+			g.addEdge(c, 23, b);
+			two = true;
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Second exception incorrectly thrown.");
+			e.printStackTrace();
+			two = false;
+		}
     	
-    	System.out.println("Added "+count+" elements.");
-    	return countTest && presentTest;
+    	try {
+			g.addEdge(a, 21, c);
+			three = true;
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Third exception incorrectly thrown.");
+			e.printStackTrace();
+			three = false;
+		}
+    	
+    	System.out.println("graph:");
+    	System.out.println(g);
+    	
+    	//the word "edge" may not show up in the string, since we've inserted no edges
+    	boolean strAnalysis = false;
+    	String graph = g.toString();
+    	String[] gr = graph.split("Edge");
+    	if(gr.length == 4) strAnalysis = true;
+    	System.out.println(gr.length-1+" edges have been inserted.");
+    	
+    	return one && two && three && strAnalysis;
     }
 
 }

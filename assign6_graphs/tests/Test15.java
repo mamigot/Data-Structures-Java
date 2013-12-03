@@ -1,8 +1,7 @@
 /**
- * Test12 -- test class extending {@link TestHarness}
+ * Test15 -- test class extending {@link TestHarness}
  * <p>
- * Tests the addEdge(T n, L l, T m) method by inputting standard data and analyzing
- * it through the getNodes() method.
+ * Makes sure that neither 'n' nor 'm' in addEdge(T n, L l, T m) are similar.
  * ***********************************************************************<br>
  * Computer Science 102: Data Structures<br>
  * New York University, Fall 2013,<br>
@@ -17,9 +16,9 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Test12 extends TestHarness {
+public class Test15 extends TestHarness {
 
-    public Test12(String s) { super(s); }
+    public Test15(String s) { super(s); }
 
     public boolean test() {
     	Graph<String,Integer> g = new Graph<String,Integer>();
@@ -37,38 +36,35 @@ public class Test12 extends TestHarness {
     	boolean three = false;
     	
     	try {
-			g.addEdge("a", 22, "b");
+			g.addEdge("a", 22, "a");
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("First exception correctly thrown.");
 			one = true;
-		} catch (InvalidOperationException e) {
-			//should throw an exception
-    		System.out.println("First exception incorrectly thrown.");
-			one = false;
 		}
     	
     	try {
-			g.addEdge("c", 22, "b");
+			g.addEdge("b", 22, "b");
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Second exception correctly thrown.");
 			two = true;
-		} catch (InvalidOperationException e) {
-			//should throw an exception
-    		System.out.println("Second exception incorrectly thrown.");
-			two = false;
 		}
     	
     	try {
-			g.addEdge("a", 22, "c");
-			three = true;
+			g.addEdge("c", 22, "c");
 		} catch (InvalidOperationException e) {
 			//should throw an exception
-    		System.out.println("Third exception incorrectly thrown.");
-			three = false;
+    		System.out.println("Third exception correctly thrown.");
+			three = true;
 		}
     	
     	//the word "edge" may not show up in the string, since we've inserted no edges
-    	boolean strAnalysis = false;
+    	boolean strAnalysis = true;
     	String graph = g.toString();
     	String[] gr = graph.split("Edge");
-    	if(gr.length == 4) strAnalysis = true;
-    	System.out.println(gr.length-1+" edges have been inserted.");
+    	if(gr.length > 1) strAnalysis = false;
+    	System.out.println("No edges have been inserted.");
     	
     	return one && two && three && strAnalysis;
     }

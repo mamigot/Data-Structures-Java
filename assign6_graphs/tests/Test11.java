@@ -1,8 +1,8 @@
 /**
  * Test11 -- test class extending {@link TestHarness}
  * <p>
- * Tests the addBiEdge(T n, L l, T m) method. Checks that there
- * is already a node with label n, and another node with label m.
+ * Tests the addBiEdge(T n, L l, T m) method. Only creates an edge if a node
+ * with label n and another with label m exist.
  * ***********************************************************************<br>
  * Computer Science 102: Data Structures<br>
  * New York University, Fall 2013,<br>
@@ -22,37 +22,55 @@ public class Test11 extends TestHarness {
     public Test11(String s) { super(s); }
 
     public boolean test() {
-    	Graph<Character,Integer> g = new Graph<Character,Integer>();
+    	Graph<String,Integer> g = new Graph<String,Integer>();
+    	try {
+			g.addNode("a");
+			g.addNode("b");
+			g.addNode("c");
+		} catch (InvalidOperationException e) {
+			//shouldn't throw an exception
+			return false;
+		}
     	
-    	//add a myriad of nodes
-    	int count = 0;
-    	int start = 32;
-    	int end = 123;
-    	//create a list where all relevant characters will be stored
-    	List<Character> charList = new ArrayList<Character>();
-    	try{
-    		for(int i=start; i<end; i++){
-    			g.addNode((char) i);
-    			charList.add((char) i);
-    			count++;
-    		}
-    	}catch(InvalidOperationException e){
-    		//Shouldn't have thrown an exception here
-    		return false;
-    	}
+    	boolean one = false;
+    	boolean two = false;
+    	boolean three = false;
     	
-    	List<Node<Character,Integer>> list = g.getNodes();
-    	boolean countTest = list.size() == count;
+    	//node with n exists but m doesn't, so shouldn't be created
+    	try {
+			g.addBiEdge("a", 22, "notThere");
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("First exception correctly thrown.");
+			one = true;
+		}
     	
-    	//checks that all of the elements that were inserted in the graph
-    	//are in the charList
-    	boolean presentTest = true;
-    	for(Node<Character, Integer> Node: list){
-    		if(!charList.contains(Node.getLabel())) presentTest = false; 
-    	}
+    	//node with n exists but m doesn't, so shouldn't be created
+    	try {
+			g.addBiEdge("notThere", 22, "b");
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Second exception correctly thrown.");
+			two = true;
+		}
     	
-    	System.out.println("Added "+count+" elements.");
-    	return countTest && presentTest;
+    	//neither n nor m exist
+    	try {
+			g.addBiEdge("hahahaha", 22, "notThere");
+		} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Third exception correctly thrown.");
+			three = true;
+		}
+    	
+    	//the word "edge" may not show up in the string, since we've inserted no edges
+    	boolean strAnalysis = true;
+    	String graph = g.toString();
+    	String[] gr = graph.split("Edge");
+    	if(gr.length > 1) strAnalysis = false;
+    	System.out.println("No edges have been inserted.");
+    	
+    	return one && two && three && strAnalysis;
     }
 
 }

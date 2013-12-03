@@ -22,37 +22,80 @@ public class Test9 extends TestHarness {
     public Test9(String s) { super(s); }
 
     public boolean test() {
-    	Graph<Character,Integer> g = new Graph<Character,Integer>();
+    	Graph<String,Integer> g = new Graph<String,Integer>();
     	
-    	//add a myriad of nodes
-    	int count = 0;
-    	int start = 32;
-    	int end = 123;
-    	//create a list where all relevant characters will be stored
-    	List<Character> charList = new ArrayList<Character>();
+    	try {
+			g.addNode("tail");
+			g.addNode("head");
+		} catch (InvalidOperationException e) {
+			//shouldn't throw an exception
+			return false;
+		}
+    	
+    	//have booleans for each parameter
+    	boolean one = false;
+    	boolean two = false;
+    	boolean three = false;
+    	//no edge should be in the graph if any of its
+    	//parameters is null
+    	try {
+    		//first parameter is null
+			g.addBiEdge(null, 1, "head");
+			//get all the nodes in the graph and iterate through their
+			//list of edges to see if the inserted edge is present
+			List<Node<String,Integer>> list1 = g.getNodes();
+			for(Node<String,Integer> Node: list1){
+				List<Edge<String,Integer>> edges = Node.getOutArcs();
+				for(Edge<String,Integer> Edge: edges){
+					//the edge with the label '1' shouldn't be in there
+					if(Edge.getLabel() == 1) one = false;
+				}
+			}
+    	} catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("First exception correctly thrown.");
+			one = true;
+		}
+			
     	try{
-    		for(int i=start; i<end; i++){
-    			g.addNode((char) i);
-    			charList.add((char) i);
-    			count++;
-    		}
-    	}catch(InvalidOperationException e){
-    		//Shouldn't have thrown an exception here
-    		return false;
-    	}
+			//second parameter is null
+			g.addBiEdge("tail", null, "head");
+			//get all the nodes in the graph and iterate through their
+			//list of edges to see if the inserted edge is present
+			List<Node<String,Integer>> list2 = g.getNodes();
+			for(Node<String,Integer> Node: list2){
+				List<Edge<String,Integer>> edges = Node.getOutArcs();
+				for(Edge<String,Integer> Edge: edges){
+					//the edge with the label '1' shouldn't be in there
+					if(Edge.getLabel() == null) two = false;
+				}
+			}
+	    } catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Second exception correctly thrown.");
+			two = true;
+		}
+			
+    	try{
+			//first parameter is null
+			g.addBiEdge("tail", 1, null);
+			//get all the nodes in the graph and iterate through their
+			//list of edges to see if the inserted edge is present
+			List<Node<String,Integer>> list3 = g.getNodes();
+			for(Node<String,Integer> Node: list3){
+				List<Edge<String,Integer>> edges = Node.getOutArcs();
+				for(Edge<String,Integer> Edge: edges){
+					//the edge with the label '1' shouldn't be in there
+					if(Edge.getLabel() == 1) one = false;
+				}
+			}
+	    } catch (InvalidOperationException e) {
+			//should throw an exception
+    		System.out.println("Third exception correctly thrown.");
+			three = true;
+		}
     	
-    	List<Node<Character,Integer>> list = g.getNodes();
-    	boolean countTest = list.size() == count;
-    	
-    	//checks that all of the elements that were inserted in the graph
-    	//are in the charList
-    	boolean presentTest = true;
-    	for(Node<Character, Integer> Node: list){
-    		if(!charList.contains(Node.getLabel())) presentTest = false; 
-    	}
-    	
-    	System.out.println("Added "+count+" elements.");
-    	return countTest && presentTest;
+    	return one && two && three;
     }
 
 }

@@ -28,6 +28,17 @@ public class Test {
 		Test4 t4 = new Test4("t4");
 		Test5 t5 = new Test5("t5");
 		Test6 t6 = new Test6("t6");
+		Test7 t7 = new Test7("t7");
+		Test8 t8 = new Test8("t8");
+		Test9 t9 = new Test9("t9");
+		Test10 t10 = new Test10("t10");
+		Test11 t11 = new Test11("t11");
+		Test12 t12 = new Test12("t12");
+		Test13 t13 = new Test13("t13");
+		Test14 t14 = new Test14("t14");
+		Test15 t15 = new Test15("t15");
+		Test16 t16 = new Test16("t16");
+		Test17 t17 = new Test17("t17");
 
 		TestHarness.run();
 	}

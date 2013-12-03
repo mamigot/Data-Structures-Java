@@ -95,8 +95,9 @@ public class Graph<T, L> {
      * doesn't already exist.
      */
     public Edge<T,L> addEdge(T n, L l, T m) throws InvalidOperationException {
+    	if(n == null || m == null) throw new InvalidOperationException("No node's label may be null.");
     	//the labels must correspond to different nodes
-    	if(n.equals(m)) throw new InvalidOperationException("The head and tail nodes must be different!");
+    	else if(n.equals(m)) throw new InvalidOperationException("The head and tail nodes must be different!");
     	
     	//retreive the appropriate nodes from the hashmap
     	Node<T,L> tail = findNode(n);
@@ -122,13 +123,21 @@ public class Graph<T, L> {
      * @throws InvalidOperationException
      */
     public Edge<T,L> addEdge(Node<T,L> N, L l, Node<T,L> M) throws InvalidOperationException {
+    	if(N == null || M == null) throw new InvalidOperationException("No node's label may be null.");
     	//the labels must correspond to different nodes
-    	if(N.getLabel().equals(M.getLabel())) throw new InvalidOperationException("The head and tail nodes must be different!");
+    	else if(N.getLabel().equals(M.getLabel())) throw new InvalidOperationException("The head and tail nodes must be different!");
     	
     	//neither "N" nor "M" may be null
     	if((N == null) || (M == null)) throw new InvalidOperationException("Both tail and head nodes must exist");
     	//label cannot be null
     	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
+    	
+    	//put the nodes in the graph if they're not there
+    	if(!nodes.containsKey(N.getLabel())){
+        	nodes.put(N.getLabel(), N);
+    	}else if(!nodes.containsKey(M.getLabel())){
+        	nodes.put(M.getLabel(), M);
+    	}
     	
     	//rename parameters to facilitate reading
     	Node<T,L> tail = N;
@@ -147,8 +156,9 @@ public class Graph<T, L> {
      * Add an edge from n to m, as well as an edge from m to n.
      */
     public void addBiEdge(T n, L l, T m) throws InvalidOperationException {
+    	if(n == null || m == null) throw new InvalidOperationException("No node's label may be null.");
     	//the labels must correspond to different nodes
-    	if(n.equals(m)) throw new InvalidOperationException("The head and tail nodes must be different!");
+    	else if(n.equals(m)) throw new InvalidOperationException("The head and tail nodes must be different!");
     	
     	//retreive the appropriate nodes from the hashmap
     	Node<T,L> one = findNode(m);
