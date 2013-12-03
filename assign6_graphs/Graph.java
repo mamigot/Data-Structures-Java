@@ -24,16 +24,27 @@ import java.util.List;
 
 public class Graph<T, L> {
 
-	//hashmap from labels to nodes
+	/**
+	 * Hashmap which maps generic labels to generic nodes.
+	 */
 	HashMap<T,Node<T,L>> nodes;
 
+	/**
+	 * Class constructor.
+	 * <p>
+	 * Initializes {@link #nodes}.
+	 */
     public Graph() {
     	nodes = new HashMap<T,Node<T,L>>();
     }
 
-    /** 
-     * Look for an existing node with label @lab and return it.
-     * Return null if no such node exists.
+    /**
+     * Used to get a node with label {@link lab} if it's in the graph.
+     * <p>
+     * If the node is not in the graph, returns null.
+     * 
+     * @param lab	generic label used to identify the node.
+     * @return 		relevant node if it's present, null if it's not.
      */
     public Node<T,L> findNode(T lab) {
     	//look for it in the hashmap    	
@@ -42,10 +53,16 @@ public class Graph<T, L> {
     	else return null;
     }
 
-    /** 
-     * Add a new node to the graph. The new node will have label {@link lab}
-     * unless a node consisting of {@link lab} already existed, in which case
-     * this method throws an {@link InvalidOperationException}.
+    /**
+     * Adds a new node to the graph.
+     * <p>
+     * The new node will have label {@link lab} unless a node consisting of {@link lab}
+     * already existed, in which case this method throws an {@link InvalidOperationException}.
+     * 
+     * @param lab	generic label used to identify the node.
+     * @return		the node that was just created.
+     * @throws InvalidOperationException if {@link lab} is null or if the node corresponding
+     * 			to {@link lab} already exists.
      */
     public Node<T,L> addNode(T lab) throws InvalidOperationException {
     	//label cannot be null
@@ -62,9 +79,13 @@ public class Graph<T, L> {
 		return newGuy;
     }
 
-
-    /** 
-     * Return a list of all of the nodes in the Graph.
+    /**
+     * Returns a list of all of the nodes in the graph.
+     * <p>
+     * Populates a list containing the nodes in the graph through an iterator and returns it,
+     * in no particular order.
+     * 
+     * @return list of nodes in the graph.
      */
     public List<Node<T,L>> getNodes() {
     	//arraylist that will be populated through the iterator and returned
@@ -82,17 +103,20 @@ public class Graph<T, L> {
 		return nodesList;
     }
 
-    /** 
-     * Create an edge with label l. This node only succeeds if there
-     * is already a node with label n, and another node with label m.
-     * Note: this is a multi-graph: there may be multiple edges
-     * between two nodes, as long as they have distinct labels.
-     * Note also that this is a directed graph, so there is an important
-     * difference between addEdge(a,x,b) and addEdge(b,x,a).
-     *
-     * If a node with label n doesn't already exist, throws an
-     * InvalidOperationException. Same thing if a node with label m
-     * doesn't already exist.
+    /**
+     * Creates an edge with label {@link l}.
+     * <p>
+     * This node only succeeds if there is already a node with label {@link n},
+     * and another node with label {@link m}. Note: since this is a multi-graph, there may
+     * be multiple edges between two nodes as long as they have distinct labels. Since this
+     * is also a directed graph, there is an important difference between addEdge(a,x,b) and addEdge(b,x,a).
+     * 
+     * @param n	generic label corresponding to the tail node in the edge.
+     * @param l	generic label specifying the value of the edge.
+     * @param m	generic label corresponding to the head node in the edge.
+     * @return
+     * @throws InvalidOperationException if {@link l}, {@link n} or {@link m} is null, if
+     * 			there are no nodes with such labels or if both labels correspond to the same node. 
      */
     public Edge<T,L> addEdge(T n, L l, T m) throws InvalidOperationException {
     	if(n == null || m == null) throw new InvalidOperationException("No node's label may be null.");
@@ -117,43 +141,64 @@ public class Graph<T, L> {
 		return newEdge;
     }
 
-    /** 
-     * Variant of {@link addEdge} in which the Nodes are specified
-     * rather than node labels.
-     * @throws InvalidOperationException
+    /**
+     * Creates an edge with label {@link l}.
+     * Variant of {@link #addEdge(T,L,T)} in which the nodes are specified.
+     * <p>
+     * Does not insert the nodes from the parameters into the graphs
+     * if they are not present already.
+     * 
+     * Note: since this is a multi-graph, there may
+     * be multiple edges between two nodes as long as they have distinct labels. Since this
+     * is also a directed graph, there is an important difference between addEdge(a,x,b) and addEdge(b,x,a).
+     * 
+     * @param N	generic node which will comprise the tail of the edge.
+     * @param l	generic label specifying the value of the edge.
+     * @param M	generic node which will comprise the head of the edge.
+     * @return
+     * @throws InvalidOperationException if {@link l}, {@link N} or {@link M} is null, if
+     * 			there are no nodes with such labels or if both labels correspond to the same node. 
      */
     public Edge<T,L> addEdge(Node<T,L> N, L l, Node<T,L> M) throws InvalidOperationException {
     	if(N == null || M == null) throw new InvalidOperationException("No node's label may be null.");
     	//the labels must correspond to different nodes
     	else if(N.getLabel().equals(M.getLabel())) throw new InvalidOperationException("The head and tail nodes must be different!");
     	
-    	//neither "N" nor "M" may be null
-    	if((N == null) || (M == null)) throw new InvalidOperationException("Both tail and head nodes must exist");
+    	//both nodes must have labels that are matched to nodes in the graph
+    	//i.e. both nodes must be in the graph
+    	if((!nodes.containsKey(N.getLabel())) || (!nodes.containsKey(M.getLabel()))){
+    		throw new InvalidOperationException("Both tail and head nodes must exist.");
+    	}
     	//label cannot be null
     	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
     	
-    	//put the nodes in the graph if they're not there
-    	if(!nodes.containsKey(N.getLabel())){
-        	nodes.put(N.getLabel(), N);
-    	}else if(!nodes.containsKey(M.getLabel())){
-        	nodes.put(M.getLabel(), M);
-    	}
-    	
-    	//rename parameters to facilitate reading
-    	Node<T,L> tail = N;
-    	Node<T,L> head = M;
+    	//retrieve the existing nodes
+    	Node<T,L> tail = findNode(N.getLabel());
+    	Node<T,L> head = findNode(M.getLabel());
     	
     	//construct the edge from the TAIL to the HEAD
     	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
-    	
+    	    	
     	//the new edge is an outbound arc from the TAIL to the HEAD
     	tail.addOutArc(newEdge);
     	
 		return newEdge;
     }
 
-    /** 
-     * Add an edge from n to m, as well as an edge from m to n.
+    /**
+     * Add an edge from {@link n} to {@link m}, as well as an edge from {@link m} to {@link n}.
+     * <p>
+     * This node only succeeds if there is already a node with label {@link n},
+     * and another node with label {@link m}. Note: since this is a multi-graph, there may
+     * be multiple edges between two nodes as long as they have distinct labels. Since this
+     * is also a directed graph, there is an important difference between addEdge(a,x,b) and addEdge(b,x,a).
+     * 
+     * @param n	generic label corresponding to the tail node in the edge.
+     * @param l	generic label specifying the value of the edge.
+     * @param m	generic label corresponding to the head node in the edge.
+     * @return
+     * @throws InvalidOperationException if {@link l}, {@link n} or {@link m} is null, if
+     * 			there are no nodes with such labels or if both labels correspond to the same node. 
      */
     public void addBiEdge(T n, L l, T m) throws InvalidOperationException {
     	if(n == null || m == null) throw new InvalidOperationException("No node's label may be null.");
@@ -178,8 +223,14 @@ public class Graph<T, L> {
     	two.addOutArc(fromTwo);
     }
 
-    /** 
-     * Display the graph as in the Assignment description
+    /**
+     * Provides string representing the graph.
+     * <p>
+     * Follows the specifications provided by the assignment description.
+     * Returns "(null)" if the graph is empty.
+     * 
+     * @return	string representing the nodes and edges in the graphs if its size
+     * 			is greater than 0; otherwise, "(null)".
      */
     public String toString() {
     	
@@ -187,13 +238,16 @@ public class Graph<T, L> {
     	
     	//get an iterator to go through the elements of the hashmap
     	Collection<Node<T, L>> collection = nodes.values();
+    	
     	//get an iterator for the collection
     	Iterator<Node<T,L>> it = collection.iterator();
     	while(it.hasNext()){
     		sb.append(it.next().toStringWithEdges());
     	}
     	
-		return sb.toString();
+    	//print "(null)" if the graph is empty
+    	if(collection.size() == 0) return "(null)";
+    	else return sb.toString();
 
     }
 }

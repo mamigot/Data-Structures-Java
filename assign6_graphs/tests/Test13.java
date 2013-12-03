@@ -27,6 +27,15 @@ public class Test13 extends TestHarness {
 		Node<String,Integer> a = new Node<String,Integer>("a");
 		Node<String,Integer> b = new Node<String,Integer>("b");
 		Node<String,Integer> c = new Node<String,Integer>("c");
+		try {
+			g.addNode("a");
+			g.addNode("b");
+			g.addNode("c");
+		} catch (InvalidOperationException e1) {
+			//why? just why?
+			return false;
+		}
+		
 		
     	boolean one = false;
     	boolean two = false;
@@ -61,6 +70,10 @@ public class Test13 extends TestHarness {
 			e.printStackTrace();
 			three = false;
 		}
+
+//    	System.out.println("one: "+one);
+//    	System.out.println("two: "+two);
+//    	System.out.println("three: "+three);
     	
     	System.out.println("graph:");
     	System.out.println(g);

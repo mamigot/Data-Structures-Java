@@ -35,6 +35,14 @@ public class Test18 extends TestHarness {
     	String bb = "bb";
     	Node<String,Integer> bbN = new Node<String,Integer>(bb);
     	try {
+			g1.addNode(aa);
+			g1.addNode(bb);
+		} catch (InvalidOperationException e1) {
+			//why? just why?
+			return false;
+		}
+    	
+    	try {
     		//all links of equal weight
     		g1.addEdge(aaN, 1, bbN);
     	} catch (InvalidOperationException e) {

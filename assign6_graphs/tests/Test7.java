@@ -24,6 +24,10 @@ public class Test7 extends TestHarness {
     public boolean test() {
     	Graph<String,Integer> g = new Graph<String,Integer>();
     	
+    	Graph<String,Integer> mikel = new Graph<String,Integer>();
+    	System.out.println("mikel graph: ");
+    	System.out.println(mikel);
+    	
     	try {
 			g.addNode("tail");
 			g.addNode("head");
