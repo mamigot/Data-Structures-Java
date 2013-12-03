@@ -56,7 +56,7 @@ public class Node<T, L> {
     public String toStringWithEdges() { 
 	StringBuilder sb = new StringBuilder(toString()+"\n");
 	for (Edge<T,L> e : outArcs) {
-	    sb.append("  --"+e.toString()+"-->"+e.getTail().toString()+"\n");
+	    sb.append("  --"+e.toString()+"-->"+e.getHead().toString()+"\n");
 	}
 	return sb.toString();
     }

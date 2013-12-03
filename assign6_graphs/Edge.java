@@ -27,8 +27,8 @@ public class Edge<T, L> {
      */
     public L getLabel() { return label; }
     public void setLabel(L l) { label = l; }
-    public Node<T,L> getHead() { return head;}
     public Node<T,L> getTail() { return tail;}
+    public Node<T,L> getHead() { return head;}
 
     /** 
      * Returns a string of the form:

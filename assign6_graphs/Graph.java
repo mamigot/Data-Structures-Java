@@ -96,8 +96,8 @@ public class Graph<T, L> {
      */
     public Edge<T,L> addEdge(T n, L l, T m) throws InvalidOperationException {
     	//retreive the appropriate nodes from the hashmap
-    	Node<T,L> head = findNode(n);
-    	Node<T,L> tail = findNode(m);
+    	Node<T,L> tail = findNode(n);
+    	Node<T,L> head = findNode(m);
     	
     	//neither "n" nor "m" may be null
     	if((head == null) || (tail == null)) throw new InvalidOperationException("Both tail and head node labels must exist");
@@ -109,7 +109,7 @@ public class Graph<T, L> {
     	
     	//the new edge is an outbound arc from the TAIL to the HEAD
     	//the naming is unorganized in the Edge class but this implementation is correct 
-    	head.addOutArc(newEdge);
+    	tail.addOutArc(newEdge);
     	
 		return newEdge;
     }
@@ -126,14 +126,14 @@ public class Graph<T, L> {
     	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
     	
     	//rename parameters to facilitate reading
-    	Node<T,L> head = N;
-    	Node<T,L> tail = M;
+    	Node<T,L> tail = N;
+    	Node<T,L> head = M;
     	
     	//construct the edge from the TAIL to the HEAD
     	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
     	
     	//the new edge is an outbound arc from the TAIL to the HEAD
-    	head.addOutArc(newEdge);
+    	tail.addOutArc(newEdge);
     	
 		return newEdge;
     }
