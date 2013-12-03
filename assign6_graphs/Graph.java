@@ -95,6 +95,9 @@ public class Graph<T, L> {
      * doesn't already exist.
      */
     public Edge<T,L> addEdge(T n, L l, T m) throws InvalidOperationException {
+    	//the labels must correspond to different nodes
+    	if(n.equals(m)) throw new InvalidOperationException("The head and tail nodes must be different!");
+    	
     	//retreive the appropriate nodes from the hashmap
     	Node<T,L> tail = findNode(n);
     	Node<T,L> head = findNode(m);
@@ -119,6 +122,9 @@ public class Graph<T, L> {
      * @throws InvalidOperationException
      */
     public Edge<T,L> addEdge(Node<T,L> N, L l, Node<T,L> M) throws InvalidOperationException {
+    	//the labels must correspond to different nodes
+    	if(N.getLabel().equals(M.getLabel())) throw new InvalidOperationException("The head and tail nodes must be different!");
+    	
     	//neither "N" nor "M" may be null
     	if((N == null) || (M == null)) throw new InvalidOperationException("Both tail and head nodes must exist");
     	//label cannot be null
@@ -141,6 +147,9 @@ public class Graph<T, L> {
      * Add an edge from n to m, as well as an edge from m to n.
      */
     public void addBiEdge(T n, L l, T m) throws InvalidOperationException {
+    	//the labels must correspond to different nodes
+    	if(n.equals(m)) throw new InvalidOperationException("The head and tail nodes must be different!");
+    	
     	//retreive the appropriate nodes from the hashmap
     	Node<T,L> one = findNode(m);
     	Node<T,L> two = findNode(n);
