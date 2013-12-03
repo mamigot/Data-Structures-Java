@@ -24,6 +24,7 @@ public class Test {
 		// %%%%% Register your new tests here, by extending this method %%%%%
 		// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+		//Graph class
 		Test3 t3 = new Test3("t3");
 		Test4 t4 = new Test4("t4");
 		Test5 t5 = new Test5("t5");
@@ -39,6 +40,13 @@ public class Test {
 		Test15 t15 = new Test15("t15");
 		Test16 t16 = new Test16("t16");
 		Test17 t17 = new Test17("t17");
+		
+		//Kevin Bacon - Dijkstra's Algorithm
+		TestKB tKB = new TestKB("tKB");
+		TestKB2 tKB2 = new TestKB2("tKB2");
+		
+		//More on Dijkstra's Algorithm
+		
 
 		TestHarness.run();
 	}
