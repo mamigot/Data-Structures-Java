@@ -46,7 +46,9 @@ public class Test {
 		TestKB2 tKB2 = new TestKB2("tKB2");
 		
 		//More on Dijkstra's Algorithm
-		
+		Test18 t18 = new Test18("t18");
+		Test19 t19 = new Test19("t19");
+		Test20 t20 = new Test20("t20");
 
 		TestHarness.run();
 	}

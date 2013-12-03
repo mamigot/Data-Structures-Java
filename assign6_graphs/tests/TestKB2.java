@@ -45,7 +45,7 @@ public class TestKB2 extends TestHarness {
 	//they'll be defined after the graph is created
 	Node<String,Integer> kbNode = null;
 	Node<String,Integer> jfNode = null;
-	
+		
 	try {
 		g.addNode(kb);
 		g.addNode(th);

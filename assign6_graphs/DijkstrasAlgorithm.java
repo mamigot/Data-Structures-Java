@@ -42,9 +42,11 @@ public class DijkstrasAlgorithm<T> {
    * whose edges have Integer labels.
    */
   public DijkstrasAlgorithm(Graph<T,Integer> graph) {
+	  //do nothing if graph is null
+	  if(graph == null) return;
+	  
 	   //create an array list with the nodes
 	   this.nodes = new ArrayList<Node<T,Integer>>(graph.getNodes());
-	   
 	   this.edges = new ArrayList<Edge<T,Integer>>();
 	   
 	   //retreive the edges from each node's getOutArcs() lists
@@ -63,6 +65,11 @@ public class DijkstrasAlgorithm<T> {
    * The main method that kicks off the algorithm. 
    */
   public void execute(Node<T,Integer> source) {
+	  //do nothing if source is null
+	  if(source == null) return;
+	  //do nothing if this.edges or this.nodes is null
+	  if(this.edges == null || this.nodes == null) return;
+	  
 	  this.settledNodes = new HashSet<Node<T,Integer>>();
 	  this.unSettledNodes = new HashSet<Node<T,Integer>>();
 	  this.predecessors = new HashMap<Node<T,Integer>, Node<T,Integer>>();
@@ -78,6 +85,9 @@ public class DijkstrasAlgorithm<T> {
   }
   
   private void findMinimalDistances(Node<T,Integer> node) {
+	  //do nothing if node is null
+	  if(node == null) return;
+	  
 	  List<Node<T,Integer>> adjacentNodes = getNeighbors(node);
 	  for (Node<T,Integer> target : adjacentNodes) {
 	    if (getShortestDistance(target) > getShortestDistance(node) + getDistance(node, target)){
@@ -89,6 +99,9 @@ public class DijkstrasAlgorithm<T> {
   }
   
   private int getDistance(Node<T,Integer> node, Node<T,Integer> target) {
+	  //return 0 if node or target are null
+	  if(node == null || target == null) return 0;
+	  
 	  for (Edge<T,Integer> edge : edges) {
 	    if (edge.getTail().equals(node) && edge.getHead().equals(target)) {
 	    	return edge.getLabel();
@@ -98,6 +111,9 @@ public class DijkstrasAlgorithm<T> {
   }
   
   private List<Node<T,Integer>> getNeighbors(Node<T,Integer> node) {
+	  //return null if node is null
+	  if(node == null) return null;
+	  
 	  List<Node<T,Integer>> neighbors = new ArrayList<Node<T,Integer>>();
 	  for (Edge<T,Integer> edge : edges) {
 	    if (edge.getTail().equals(node) && !isSettled(edge.getHead())) {
@@ -108,6 +124,9 @@ public class DijkstrasAlgorithm<T> {
   }
   
   private Node<T,Integer> getMinimum(Set<Node<T,Integer>> vertexes) {
+	  //return null if vertexes is null
+	  if(vertexes == null) return null;
+	  
 	  Node<T,Integer> minimum = null;
 	  for (Node<T,Integer> vertex : vertexes) {
 	    if (minimum == null) {
@@ -126,6 +145,9 @@ public class DijkstrasAlgorithm<T> {
   }
   
   private int getShortestDistance(Node<T,Integer> destination) {
+	  //return 0 if destination is null
+	  if(destination == null) return 0;
+	  
 	  Integer d = distance.get(destination);
 	  if (d == null) {
 	    return Integer.MAX_VALUE;
@@ -140,6 +162,11 @@ public class DijkstrasAlgorithm<T> {
    * null if no path exists
    */
   public LinkedList<Node<T,Integer>> getPath(Node<T,Integer> target) {
+	 //return null if target is null
+	 if(target == null) return null;
+	 //return null if this.edges or this.nodes is null
+	 if(this.edges == null || this.nodes == null) return null;
+	  
 	 LinkedList<Node<T,Integer>> path = new LinkedList<Node<T,Integer>>();
 	 Node<T,Integer> step = target;
 	  // check if a path exists

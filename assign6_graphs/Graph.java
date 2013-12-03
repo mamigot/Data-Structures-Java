@@ -170,8 +170,8 @@ public class Graph<T, L> {
     	if(l == null) throw new InvalidOperationException("Can't add a 'null' label.");
     	
     	//construct two edges to link nodes "one" and "two"
-    	Edge<T,L> fromOne = new Edge<T,L>(l, one, two);
-    	Edge<T,L> fromTwo = new Edge<T,L>(l, two, one);
+    	Edge<T,L> fromOne = new Edge<T,L>(l, two, one);
+    	Edge<T,L> fromTwo = new Edge<T,L>(l, one, two);
     	
     	//add them to their respective instantiations
     	one.addOutArc(fromOne);
