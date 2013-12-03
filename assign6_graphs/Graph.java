@@ -108,7 +108,6 @@ public class Graph<T, L> {
     	Edge<T,L> newEdge = new Edge<T,L>(l, head, tail);
     	
     	//the new edge is an outbound arc from the TAIL to the HEAD
-    	//the naming is unorganized in the Edge class but this implementation is correct 
     	tail.addOutArc(newEdge);
     	
 		return newEdge;
