@@ -15,6 +15,9 @@ public class CWSolution {
     {	
     	mapWordLengths = new HashMap<Integer,ArrayList<String>>();
     	
+    	//check for null parameter
+    	if(allWords == null) return;
+    	
     	//go through all words
     	//place them in arraylist depending on their length
     	for(String currWord : allWords){
@@ -35,14 +38,17 @@ public class CWSolution {
     	}
     }
 
+    //All words will be the actual words, not funny characters
     public List<String> solutions(String pattern, int maxRequired)
     { 	//for example: ***A*
     	
     	//solutions' list that will get built up
     	List<String> solution = new ArrayList<String>();
     	
-    	//no words have been provided through the constructor, so return an empty list
+    	//if no words have been provided through the constructor, return an empty list
     	if(mapWordLengths.size() == 0) return solution;
+    	//check for null parameters and maxRequired = 0
+    	if(pattern == null || maxRequired == 0) return solution; 
     	
     	//only uppercase characters are valid
     	pattern = pattern.toUpperCase();
@@ -59,8 +65,9 @@ public class CWSolution {
 		int size = currArray.size();
 		for(int i=0; i<size; i++){
 			//use regex to increase performance and speed when matching
-			//'*' symbols throw regex exceptions
-			Pattern regex = Pattern.compile(pattern.replace('*', '.'));
+			//'*' symbols throw regex exceptions so change them to '.'
+			//add .CASE_INSENSITIVE parameter to match lower and upper case words
+			Pattern regex = Pattern.compile(pattern.replace('*', '.'), Pattern.CASE_INSENSITIVE);
 			Matcher matcher = regex.matcher(currArray.get(i));
 			
 			if(matcher.matches()){

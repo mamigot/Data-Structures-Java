@@ -1,6 +1,7 @@
 // ***********************************************************************
 //
-// Test1 -- An example test : confirms that the set is initially of size 0
+// Test4 -- Enter words in lower and upper-case through the constructor
+// and later provide upper-case words
 //
 // ***********************************************************************
 // Computer Science 102: Data Structures
@@ -13,20 +14,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test1 extends TestHarness {
+public class Test4 extends TestHarness {
 
-    public Test1(String s) { super(s); }
+    public Test4(String s) { super(s); }
 
     public boolean test() { 
 	List<String> dict = new ArrayList<String>();
+	dict.add("Tomatoes");
+	dict.add("potaTOes");
+	dict.add("MomavoEs");
 	
 	try {
-	    //Check what happens if we try give no words
+	    //parameter to solutions() is lower-case
 	    CWSolution c = new CWSolution(dict);
-	    List<String> result = c.solutions("abc*",10);
-	    //Nothing should match
-	    System.out.println("An example test : confirms that the set is initially of size 0");
-	    return (result.size() == 0);
+	    List<String> result = c.solutions("*o*a*oes",10);
+	   
+	    System.out.println("Enter words in lower and upper-case through the constructor and later provide upper-case words");
+	    System.out.println("Entered: "+dict);
+	    System.out.println("Result: "+result);
+	    
+	    return (result.size() == 3) && (dict.equals(result));
 	} catch (Exception e){
 	    //if we catch an exception, something went wrong
 	    return false;

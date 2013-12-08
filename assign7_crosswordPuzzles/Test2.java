@@ -1,6 +1,6 @@
 // ***********************************************************************
 //
-// Test1 -- An example test : confirms that the set is initially of size 0
+// Test2 -- Provide null parameter to the constructor
 //
 // ***********************************************************************
 // Computer Science 102: Data Structures
@@ -13,19 +13,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test1 extends TestHarness {
+public class Test2 extends TestHarness {
 
-    public Test1(String s) { super(s); }
+    public Test2(String s) { super(s); }
 
-    public boolean test() { 
-	List<String> dict = new ArrayList<String>();
-	
+    public boolean test() {
+    	
 	try {
-	    //Check what happens if we try give no words
-	    CWSolution c = new CWSolution(dict);
+	    //null parameter to the constructor
+	    CWSolution c = new CWSolution(null);
 	    List<String> result = c.solutions("abc*",10);
 	    //Nothing should match
-	    System.out.println("An example test : confirms that the set is initially of size 0");
+	    System.out.println("Provide null parameter to the constructor");
 	    return (result.size() == 0);
 	} catch (Exception e){
 	    //if we catch an exception, something went wrong

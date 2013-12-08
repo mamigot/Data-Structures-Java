@@ -1,6 +1,6 @@
 // ***********************************************************************
 //
-// Test1 -- An example test : confirms that the set is initially of size 0
+// Test3 -- Provide null parameter to the solutions() method
 //
 // ***********************************************************************
 // Computer Science 102: Data Structures
@@ -13,19 +13,24 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test1 extends TestHarness {
+public class Test3 extends TestHarness {
 
-    public Test1(String s) { super(s); }
+    public Test3(String s) { super(s); }
 
-    public boolean test() { 
+    public boolean test() {
+    	
 	List<String> dict = new ArrayList<String>();
+	dict.add("hahaha");
+	dict.add("that");
+	dict.add("is");
+	dict.add("funny");
 	
 	try {
-	    //Check what happens if we try give no words
+	    //give words
 	    CWSolution c = new CWSolution(dict);
-	    List<String> result = c.solutions("abc*",10);
+	    List<String> result = c.solutions(null,10);
 	    //Nothing should match
-	    System.out.println("An example test : confirms that the set is initially of size 0");
+	    System.out.println("Provide null parameter to the solutions() method");
 	    return (result.size() == 0);
 	} catch (Exception e){
 	    //if we catch an exception, something went wrong
