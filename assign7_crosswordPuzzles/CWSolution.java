@@ -21,6 +21,11 @@ public class CWSolution {
     	//go through all words
     	//place them in arraylist depending on their length
     	for(String currWord : allWords){
+    		
+    		//replace the '*' with a '.' for regex
+			//'*' symbols throw regex exceptions so change them to '.'
+    		currWord = currWord.replace('*', '.');
+    		
     		int length = currWord.length();
     		ArrayList<String> currArr = mapWordLengths.get(length);
     		
@@ -50,8 +55,8 @@ public class CWSolution {
     	//check for null parameters and maxRequired = 0
     	if(pattern == null || maxRequired == 0) return solution; 
     	
-    	//only uppercase characters are valid
-//    	pattern = pattern.toUpperCase();
+		//replace the '*' with a '.' for regex
+    	pattern = pattern.replace('*', '.');
     	
     	//figure out the length of the pattern and retrieve the appropriate array
     	//only iterate through that (relatively) small set of words
@@ -65,9 +70,8 @@ public class CWSolution {
 		int size = currArray.size();
 		for(int i=0; i<size; i++){
 			//use regex to increase performance and speed when matching
-			//'*' symbols throw regex exceptions so change them to '.'
 			//add .CASE_INSENSITIVE parameter to match lower and upper case words
-			Pattern regex = Pattern.compile(pattern.replace('*', '.'), Pattern.CASE_INSENSITIVE);
+			Pattern regex = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
 			Matcher matcher = regex.matcher(currArray.get(i));
 			
 			if(matcher.matches()){
