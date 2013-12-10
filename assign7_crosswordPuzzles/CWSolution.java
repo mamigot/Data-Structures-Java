@@ -51,7 +51,7 @@ public class CWSolution {
     	if(pattern == null || maxRequired == 0) return solution; 
     	
     	//only uppercase characters are valid
-    	pattern = pattern.toUpperCase();
+//    	pattern = pattern.toUpperCase();
     	
     	//figure out the length of the pattern and retrieve the appropriate array
     	//only iterate through that (relatively) small set of words
