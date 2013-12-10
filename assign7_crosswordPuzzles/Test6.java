@@ -1,7 +1,7 @@
 // ***********************************************************************
 //
-// Test4 -- Enter words in lower and upper-case through the constructor
-// and later provide upper-case words
+// Test6 -- Let the maxRequired parameter in solutions() be less than
+// the existing number of words
 //
 // ***********************************************************************
 // Computer Science 102: Data Structures
@@ -14,9 +14,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test4 extends TestHarness {
+public class Test6 extends TestHarness {
 
-    public Test4(String s) { super(s); }
+    public Test6(String s) { super(s); }
 
     public boolean test() { 
 	List<String> dict = new ArrayList<String>();
@@ -28,13 +28,14 @@ public class Test4 extends TestHarness {
 	try {
 	    //parameter to solutions() is lower-case
 	    CWSolution c = new CWSolution(dict);
-	    List<String> result = c.solutions("*O*A*OES",10);
+	    //we know there are 3 solutions, but we only want 2
+	    List<String> result = c.solutions("*o*A*OeS",2);
 	   
-	    System.out.println("Enter words in lower and upper-case through the constructor and later provide upper-case words");
+	    System.out.println("Let the maxRequired parameter in solutions() be less than the existing number of words");
 	    System.out.println("Entered: "+dict);
 	    System.out.println("Result: "+result);
 	    
-	    return (result.size() == 3);
+	    return (result.size() == 2);
 	} catch (Exception e){
 	    //if we catch an exception, something went wrong
 	    return false;

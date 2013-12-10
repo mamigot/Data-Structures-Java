@@ -17,11 +17,13 @@ public class Test {
 
 	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	// %%%%% Register your new tests here, by extending this method %%%%%
-	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	Test2 t2 = new Test2("t2");
 	Test3 t3 = new Test3("t3");
 	Test4 t4 = new Test4("t4");
+	Test5 t5 = new Test5("t5");
+	Test6 t6 = new Test6("t6");
 	
 	TestHarness.run();
 
