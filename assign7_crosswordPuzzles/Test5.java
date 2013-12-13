@@ -1,15 +1,18 @@
-// ***********************************************************************
-//
-// Test5 -- Enter words in lower and upper-case through the constructor
-// and later provide lower-case and upper-case words
-//
-// ***********************************************************************
-// Computer Science 102: Data Structures
-// New York University, Fall 2013,
-//
-// Lecturers: Eric Koskinen and Daniel Schwartz-Narbonne
-//
-// ***********************************************************************
+/**
+ * Test5 -- test class extending {@link TestHarness}
+ * <p>
+ * Enter words in lower and upper-case through the constructor and later
+ * provide lower-case and upper-case words.
+ * ***********************************************************************<br>
+ * Computer Science 102: Data Structures<br>
+ * New York University, Fall 2013,<br>
+ * Lecturers: Eric Koskinen and Daniel Schwartz-Narbonne<br>
+ * ***********************************************************************
+ *
+ * @author      Miguel Amigot <ma2786@nyu.edu>
+ * @version     Assignment 7
+ * @since       2013-12-13
+ */
 
 import java.util.ArrayList;
 import java.util.List;

@@ -24,6 +24,7 @@ public class Test {
 	Test4 t4 = new Test4("t4");
 	Test5 t5 = new Test5("t5");
 	Test6 t6 = new Test6("t6");
+	Test7 t7 = new Test7("t7");
 	
 	TestHarness.run();
 

@@ -1,8 +1,8 @@
 /**
- * Test3 -- test class extending {@link TestHarness}
+ * Test7 -- test class extending {@link TestHarness}
  * <p>
- * Provide null parameter to the solutions() method and verify that the returned
- * list's length is 0.
+ * Provide a pattern with no letters e.g. "********" and verify that a
+ * non-empty list is returned.
  * ***********************************************************************<br>
  * Computer Science 102: Data Structures<br>
  * New York University, Fall 2013,<br>
@@ -17,25 +17,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test3 extends TestHarness {
+public class Test7 extends TestHarness {
 
-    public Test3(String s) { super(s); }
+    public Test7(String s) { super(s); }
 
-    public boolean test() {
-    	
+    public boolean test() { 
 	List<String> dict = new ArrayList<String>();
-	dict.add("hahaha");
-	dict.add("that");
-	dict.add("is");
-	dict.add("funny");
+	dict.add("Hello");
+	dict.add("potaTOes");
+	dict.add("MomavoEs");
+	dict.add("hahahahahahaha");
 	
 	try {
-	    //give words
 	    CWSolution c = new CWSolution(dict);
-	    List<String> result = c.solutions(null,10);
-	    //Nothing should match
-	    System.out.println("Provide null parameter to the solutions() method");
-	    return (result.size() == 0);
+	    List<String> result = c.solutions("********",10);
+	   
+	    System.out.println("Provide a pattern with no letters e.g. \"********\"");
+	    System.out.println("Entered: "+dict);
+	    System.out.println("Result: "+result);
+	    
+	    return (result.size() == 2);
 	} catch (Exception e){
 	    //if we catch an exception, something went wrong
 	    return false;

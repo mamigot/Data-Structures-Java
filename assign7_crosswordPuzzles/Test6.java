@@ -1,15 +1,18 @@
-// ***********************************************************************
-//
-// Test6 -- Let the maxRequired parameter in solutions() be less than
-// the existing number of words
-//
-// ***********************************************************************
-// Computer Science 102: Data Structures
-// New York University, Fall 2013,
-//
-// Lecturers: Eric Koskinen and Daniel Schwartz-Narbonne
-//
-// ***********************************************************************
+/**
+ * Test6 -- test class extending {@link TestHarness}
+ * <p>
+ * Let the maxRequired parameter in solutions() be less than the existing
+ * number of words.
+ * ***********************************************************************<br>
+ * Computer Science 102: Data Structures<br>
+ * New York University, Fall 2013,<br>
+ * Lecturers: Eric Koskinen and Daniel Schwartz-Narbonne<br>
+ * ***********************************************************************
+ *
+ * @author      Miguel Amigot <ma2786@nyu.edu>
+ * @version     Assignment 7
+ * @since       2013-12-13
+ */
 
 import java.util.ArrayList;
 import java.util.List;
