@@ -19,20 +19,20 @@ import java.util.List;
 
 public class Test2 extends TestHarness {
 
-    public Test2(String s) { super(s); }
+	public Test2(String s) { super(s); }
 
-    public boolean test() {
-    	
-	try {
-	    //null parameter to the constructor
-	    CWSolution c = new CWSolution(null);
-	    List<String> result = c.solutions("abc*",10);
-	    //Nothing should match
-	    System.out.println("Provide null parameter to the constructor");
-	    return (result.size() == 0);
-	} catch (Exception e){
-	    //if we catch an exception, something went wrong
-	    return false;
+	public boolean test() {
+
+		try {
+			//null parameter to the constructor
+			CWSolution c = new CWSolution(null);
+			List<String> result = c.solutions("abc*",10);
+			//Nothing should match
+			System.out.println("Provide null parameter to the constructor");
+			return (result.size() == 0);
+		} catch (Exception e){
+			//if we catch an exception, something went wrong
+			return false;
+		}
 	}
-    }
 }
