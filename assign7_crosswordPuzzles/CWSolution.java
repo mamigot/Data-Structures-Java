@@ -22,9 +22,7 @@ public class CWSolution {
     	//place them in arraylist depending on their length
     	for(String currWord : allWords){
     		
-    		//replace the '*' with a '.' for regex
-			//'*' symbols throw regex exceptions so change them to '.'
-    		currWord = currWord.replace('*', '.');
+    		currWord = currWord.toUpperCase();
     		
     		int length = currWord.length();
     		ArrayList<String> currArr = mapWordLengths.get(length);
@@ -55,26 +53,25 @@ public class CWSolution {
     	//check for null parameters and maxRequired = 0
     	if(pattern == null || maxRequired == 0) return solution; 
     	
-		//replace the '*' with a '.' for regex
-    	pattern = pattern.replace('*', '.');
+    	pattern = pattern.toUpperCase();
     	
     	//figure out the length of the pattern and retrieve the appropriate array
     	//only iterate through that (relatively) small set of words
     	int len = pattern.length();
     	ArrayList<String> currArray = mapWordLengths.get(len);
-    	    	
+    	
+//    	System.out.println("This is the printed array: ");
+//    	//[AAHS, AALS, ABAS, ABBA, ABBE]
+//    	System.out.println(currArray.toString());
+    	
     	//only need to supply a number that's equal to maxRequired
     	int counter = 0;
 		
     	//iterate through the retrieved array and add matching words to the solution
 		int size = currArray.size();
 		for(int i=0; i<size; i++){
-			//use regex to increase performance and speed when matching
-			//add .CASE_INSENSITIVE parameter to match lower and upper case words
-			Pattern regex = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-			Matcher matcher = regex.matcher(currArray.get(i));
 			
-			if(matcher.matches()){
+			if(checkMatch(pattern, currArray.get(i), len)){
 				//the word from the array matches!!!
 				solution.add(currArray.get(i));
 				
@@ -82,10 +79,28 @@ public class CWSolution {
 				counter++;
 				if(counter >= maxRequired) break;
 			}
+			
 		}
 		
 		return solution;
     }
+    
+    //checks if the pattern matches the array's word
+    //e.g. pattern="VEHICLE" and arrWord="**H****" will return true
+    public boolean checkMatch(String pattern, String arrWord, int lengthPattern){
+    	
+    	for(int p=0; p<lengthPattern; p++){
+    		char curr = pattern.charAt(p);
+    		if(curr != '*'){
+    			//compare it to the array's word
+    			if(arrWord.charAt(p) != curr) return false;
+    		}
+    	}
+    	
+    	return true;
+    }
+    
+    
     
     
 }
