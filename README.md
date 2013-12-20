@@ -32,3 +32,7 @@ Index:
         a. "Graph.java" implements a basic directed graph with nodes and edges both having their own generic type. The public methods are findNode(), addNode(), getNodes(), addEdge() (overloaded), addBiEdge() and toString(). New nodes and edges are created through "Node.java" and "Edge.java".
         
         b. Dijkstra's Algorithm to find the shortest paths from a specified node to the rest of the nodes in a graph is implemented through "DijkstrasAlgorithm.java".
+
+4. assign7_crosswordPuzzles:
+  
+        a. "CWSolution.java" provides the crossword-puzzle solution generator. A list of plausible words is provided through the constructor and checked against the pattern provided by the public solutions() method.
