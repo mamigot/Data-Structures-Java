@@ -5,12 +5,12 @@
 
 
 public class SortedMapException extends Exception {
-    public SortedMapException(String message) {
-        super(message);
-    }
+	public SortedMapException(String message) {
+		super(message);
+	}
 
-    public SortedMapException(String message, Throwable throwable) {
-        super(message, throwable);
-    }
+	public SortedMapException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
 
 }

@@ -39,7 +39,7 @@ public class BSTMapInorderIterator<T extends Comparable<T>> implements Iterator<
 	 * Reference to the main BST. Useful to call its remove method.
 	 */
 	protected BSTMap<T,?> mainBST;
-	
+
 	/**
 	 * Constructor for the iterator called from the main BSTMap class.
 	 * <p>
@@ -52,7 +52,7 @@ public class BSTMapInorderIterator<T extends Comparable<T>> implements Iterator<
 	 */
 	protected BSTMapInorderIterator(BSTMapNode<T, ?> root, BSTMap<T,?> refBST, int versionNumberBSTmap, VisitorOrder v){ //Takes also the reference to the BST whose remove() we'll call
 		//Populate the instantiated stack with the keys from the inOrder traversal
-	
+
 		visitOrder = v;
 		stack = new Stack<BSTMapNode<T,?>>();
 		if(root != null){
@@ -64,9 +64,9 @@ public class BSTMapInorderIterator<T extends Comparable<T>> implements Iterator<
 		//Save "root" as an instance variable for the remove method
 		mainBST = refBST;
 		versionNumberIterator = versionNumberBSTmap;
-			
+
 	}
-	
+
 	/**
 	 * Populates the stack through an in order traversal.
 	 * 
@@ -78,7 +78,7 @@ public class BSTMapInorderIterator<T extends Comparable<T>> implements Iterator<
 		if(N != null) stack.push(N);
 		if(N.right != null) populateStackInOrder(N.right);
 	}
-	
+
 	/**
 	 * Populates the stack through a pre order traversal.
 	 * 
@@ -90,7 +90,7 @@ public class BSTMapInorderIterator<T extends Comparable<T>> implements Iterator<
 		if(N.left != null) populateStackPreOrder(N.left);
 		if(N.right != null) populateStackPreOrder(N.right);
 	}
-	
+
 	/**
 	 * Determines whether the iterator has a next element.
 	 * 
@@ -136,7 +136,7 @@ public class BSTMapInorderIterator<T extends Comparable<T>> implements Iterator<
 				//Increment the iterator after removing it (but the main class will also get incremented)
 				//Set the tracker to null to avoid the possibility of the user calling remove() twice in a row
 				if(res){ nextTracker = null; versionNumberIterator++; }
-				
+
 			}else throw new RuntimeException("Wasn't removed because .next() hasn't been called.");
 		} catch (SortedMapException e) {
 			System.out.println("Error calling the iterator's remove() method");

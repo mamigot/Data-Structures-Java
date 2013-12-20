@@ -37,7 +37,7 @@ public class BSTMapNode<K extends Comparable<K>,V> {
 	 * Reference to the node's parent (null if it's the tree's root).
 	 */
 	protected BSTMapNode<K,V> parent;
-	
+
 	/**
 	 * Class constructor.
 	 * <p>
@@ -52,7 +52,7 @@ public class BSTMapNode<K extends Comparable<K>,V> {
 	protected BSTMapNode(K k,V v, BSTMapNode<K,V> l, BSTMapNode<K,V> r, BSTMapNode<K,V> p){
 		key = k; value = v; left = l; right = r; parent = p;
 	}
-	
+
 	/**
 	 * States whether a node is a leaf of the tree.
 	 * 
@@ -84,7 +84,7 @@ public class BSTMapNode<K extends Comparable<K>,V> {
 	protected boolean hasOneChild() {
 		return (left==null && right != null) || (left!=null && right==null);
 	}
-	
+
 	/**
 	 * Returns a string representation of a single node, through its key and value.
 	 * 
@@ -93,6 +93,6 @@ public class BSTMapNode<K extends Comparable<K>,V> {
 	public String toString(){
 		return "\""+key+"\"\""+value+"\"";
 	}
-	
+
 
 }

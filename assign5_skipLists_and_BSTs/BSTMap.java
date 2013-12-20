@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
-	
+
 	/**
 	 * Saves the preferred way of traversing the BST. May be PREORDER or INORDER.
 	 */
@@ -43,7 +43,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	 * Sorted map which stores the statistics provided by {@link #calculateStats()}
 	 */
 	protected SortedMap<Integer, Integer> mapLevelNodes;
-	
+
 	/**
 	 * Class constructor.
 	 * <p>
@@ -51,7 +51,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	 * the {@link #BSTsize} and {@link #versionNumberBSTmap} counters.
 	 */
 	public BSTMap(){ root = null; defaultVisitOrder=VisitorOrder.INORDER; BSTsize=0; versionNumberBSTmap=0; }
-	
+
 	/**
 	 * Getter for the BST's size variable.
 	 * @return integer variable of the size.
@@ -72,7 +72,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	public void put(K key, V value) throws SortedMapException {
 		//Cannot accept null values
 		if(key==null || value==null) throw new SortedMapException("Neither 'key' nor 'value' may be null!");
-		
+
 		//If the BST is empty set up the root
 		if(root==null){
 			root = new BSTMapNode<K, V>(key, value, null, null, null);
@@ -84,7 +84,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			if(added){ versionNumberBSTmap++; }
 		}
 	}
-	
+
 	/**
 	 * Helper method for {@link #put(K, V)} to recursively add nodes to the BST.
 	 * <p>
@@ -155,7 +155,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			else return null;
 		}
 	}
-	
+
 	/**
 	 * Helper method for {@link #get(K)} to recursively search through nodes of the BST.
 	 * <p>
@@ -169,11 +169,11 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	private BSTMapNode<K,V> dig(K digKey, BSTMapNode<K,V> N){
 		//If the node is null do not attempt to traverse through it!
 		if(N == null) return null;
-		
+
 		//Return the found key if it corresponds to that provided by the parameter
 		int ct = digKey.compareTo(N.key);
 		if(ct == 0) return N;
-		
+
 		//Nodes corresponding to greater keys will fall to the current's right
 		//(lower-valued keys fall to the left)
 		else if(ct>0) return dig(digKey,N.right);
@@ -208,7 +208,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			return success;
 		}
 	}
-	
+
 	/**
 	 * Helper method for {@link #remove(K)} to recursively search through nodes of the BST.
 	 * <p>
@@ -225,9 +225,9 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	private boolean takeOut(K toRemoveKey, BSTMapNode<K,V> N) throws SortedMapException{
 		//Reached the end without finding it
 		if(N==null){ return false; }
-		
+
 		int ct = toRemoveKey.compareTo(N.key);
-		
+
 		if(ct>0){
 			return takeOut(toRemoveKey,N.right);
 		}else if(ct<0){
@@ -250,7 +250,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 				//"Updating in place makes it easier to handle the case of the root"
 				N.value = rightmost.value;
 				N.key = rightmost.key;
-				
+
 				//"Now deal with the rightmost node and its children"
 				if(rightmost.isLeaf()){
 					deleteLeaf(rightmost);
@@ -261,7 +261,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			return true;
 		}
 	}
-	
+
 	/**
 	 * Helper method for {@link #takeOut(K, BSTMapNode<K,V>)} to simply delete leafs of the BST.
 	 * <p>
@@ -278,7 +278,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			L.parent.right = null;
 		}
 	}
-	
+
 	/**
 	 * Helper method for {@link #takeOut(K, BSTMapNode<K,V>)} to adjust the BST's hierarchy.
 	 * <p>
@@ -290,14 +290,14 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	private void shiftNodeUp(BSTMapNode<K,V> N) throws SortedMapException{
 		if(N.parent == null) throw new SortedMapException("Can't shift up root node");
 		if(!N.parent.hasOneChild()) throw new SortedMapException("Can't shift into full parent");
-		
+
 		//Move the values and the children
 		//Take N's value and give it to its parent
 		N.parent.value = N.value;
 		//Bypass N and access its children
 		N.parent.left = N.left;
 		N.parent.right = N.right;
-		
+
 		//Depends on whether you're the left child or the next child
 		if(N.parent.left != null){
 			N.parent.left.parent = N.parent;
@@ -306,12 +306,12 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			N.parent.right.parent = N.parent;
 		}
 	}
-	
+
 	/**
 	 * Used to concatenate string representations of nodes in the BST.
 	 */
 	private String inOrderTot = "";
-	
+
 	/**
 	 * Provides a string, INORDER representation of the BST.
 	 * <p>
@@ -329,7 +329,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			return inOrderTraversal(root);
 		}
 	}
-	
+
 	/**
 	 * Helper method for {@link #toString()} to perform an INORDER traversal for the BST
 	 * <p>
@@ -347,7 +347,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 
 		return this.inOrderTot;
 	}
-	
+
 	/**
 	 * Sets {@link #defaultVisitOrder} to INORDER or PREORDER if these values are provided
 	 * by the user. 
@@ -356,11 +356,11 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	 * @throws SortedMapException if the parameters neither contain PREORDER or INORDER.
 	 */
 	public void setIteratorDefault(VisitorOrder v) throws SortedMapException {
-        if (v != VisitorOrder.PREORDER && v != VisitorOrder.INORDER){
-        	throw new SortedMapException("Iterator type not implemented");
-        }
-        defaultVisitOrder = v;
-    }
+		if (v != VisitorOrder.PREORDER && v != VisitorOrder.INORDER){
+			throw new SortedMapException("Iterator type not implemented");
+		}
+		defaultVisitOrder = v;
+	}
 
 	/**
 	 * Constructs an iterator for this version of the BST (detailed by {@link #versionNumberBSTmap})
@@ -373,7 +373,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 		//if we want to use its remove method
 		return new BSTMapInorderIterator<K>(root, this, versionNumberBSTmap, defaultVisitOrder);
 	}
-	
+
 	/**
 	 * Calculates relevant statistics to analyze the performance of the BST.
 	 * <p>
@@ -391,7 +391,7 @@ public class BSTMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			return mapLevelNodes;
 		}else return null; //return a null object for an empty BST
 	}
-	
+
 	/**
 	 * Helper method for {@link #calculateStats()} to update the statistics on the BST
 	 * <p>

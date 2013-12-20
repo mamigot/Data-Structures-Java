@@ -35,7 +35,7 @@ public class SkiplistMapIterator<T extends Comparable<T>> implements Iterator<T>
 	 * Reference to the main skip-list. Useful to call its remove method.
 	 */
 	protected SkiplistMap<T,?> mainSkipList;
-	
+
 	/**
 	 * Constructor for the iterator called from the main SkiplistMap class.
 	 * <p>
@@ -53,7 +53,7 @@ public class SkiplistMapIterator<T extends Comparable<T>> implements Iterator<T>
 		else queue = null;
 		versionNumberIterator = versionNumberSkipList; //The versions of the skip-list and iterator are equal upon construction
 	}
-	
+
 	/**
 	 * Helper method for the constructor; populates the stack through a linear traversal.
 	 * 
@@ -67,7 +67,7 @@ public class SkiplistMapIterator<T extends Comparable<T>> implements Iterator<T>
 			current = current.nodeRefsArray[0]; //keep going forward!
 		}
 	}
-	
+
 	/**
 	 * Determines whether the iterator has a next element.
 	 * 

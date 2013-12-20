@@ -17,7 +17,7 @@
 import java.util.Iterator;
 
 public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
-	
+
 	/**
 	 * Head node for the skip-list.
 	 */
@@ -73,19 +73,19 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 	public void put(K key, V value) throws SortedMapException {
 		//Cannot accept null values
 		if(key==null || value==null) throw new SortedMapException("Neither 'key' nor 'value' may be null!");
-		
+
 		//Check if the node already exists
 		SkiplistMapNode<K,V> existingNode = contains(key);
 		if(existingNode != null){ //Update its value
 			existingNode.value = value; versionNumberSkipList++;
 			return; //end the method here
 		}
-				
+
 		//Based on 50% probabilities
 		int levels = determineArraySize();
 		//Create a new node
 		SkiplistMapNode<K,V> newNode = new SkiplistMapNode<K,V>(key, value, levels);
-	
+
 		//Find where it should be in the skip-list
 		//Don't tamper with "head" -- use the "current" variable to traverse
 		SkiplistMapNode<K,V> current = head;
@@ -104,7 +104,7 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 		}
 		sizeSkipList++; versionNumberSkipList++; //increment the size and version counters
 	}
-	
+
 	/**
 	 * Helper method for {@link #put(K, V)} to determine if a node corresponding to the provided key already exists.
 	 * 
@@ -126,7 +126,7 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 		}
 		return null; //if it was never found return null
 	}
-	
+
 	/**
 	 * Helper method for {@link #put(K, V)} to determine the size of the new node's level array.
 	 * <p>
@@ -206,7 +206,7 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 		if(found) versionNumberSkipList++; sizeSkipList--; //decrease the size counter and increase the version counter!
 		return found;
 	}
-	
+
 	/**
 	 * Provides a string, full representation of the skip-list.
 	 * <p>
@@ -228,7 +228,7 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			return tot;
 		}
 	}
-	
+
 	/**
 	 * Constructs an iterator for this version of the skip-list.
 	 * 
@@ -238,7 +238,7 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 		if(head == null) System.out.println("The SkipList is empty but here's an iterator anyway.");
 		return new SkiplistMapIterator<K>(head, this, versionNumberSkipList);
 	}
-	
+
 	/**
 	 * Calculates relevant statistics to analyze the performance of the skip-list.
 	 * <p>
@@ -253,7 +253,7 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 			return traverseComparisons();
 		}else return null; //null if the skip-list is empty
 	}
-	
+
 	/**
 	 * Helper method for {@link #calculateStats()} to traverse through the nodes linearly.
 	 * <p>
@@ -268,11 +268,11 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 		SkiplistMapNode<K,V> current = head;
 		//traverse through the skip-list linearly
 		while(current.nodeRefsArray[0] != null){
-			
+
 			try {
 				//Get a number of comparisons for that node (ind. variable)
 				int numComparisons = getComparisons(current.nodeRefsArray[0].key);
-				
+
 				//Check if there is a value corresponding to that specific number of comparisons
 				Integer res = mapLevelNodes.get(numComparisons);
 				if(res == null) mapLevelNodes.put(numComparisons, 1); //First one
@@ -280,14 +280,14 @@ public class SkiplistMap<K extends Comparable<K>,V> implements SortedMap<K,V> {
 					Integer newVal = new Integer(res.intValue() + 1);
 					mapLevelNodes.put(numComparisons, newVal);
 				}
-				
+
 			} catch (SortedMapException e) { e.printStackTrace();}
-			
+
 			current = current.nodeRefsArray[0]; //traverse forward
 		}
 		return mapLevelNodes; //return the sorted map
 	}
-	
+
 	/**
 	 * Helper method for {@link #traverseComparisons()} to traverse through the nodes linearly.
 	 * <p>

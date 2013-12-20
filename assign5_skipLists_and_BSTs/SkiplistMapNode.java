@@ -28,7 +28,7 @@ public class SkiplistMapNode<K extends Comparable<K>,V> {
 	 * Array containing the references to the nodes of the skip-list.
 	 */
 	protected SkiplistMapNode<K,V>[] nodeRefsArray;
-	
+
 	/**
 	 * Class constructor.
 	 * <p>
@@ -38,7 +38,7 @@ public class SkiplistMapNode<K extends Comparable<K>,V> {
 		key = k; value = val;
 		nodeRefsArray = new SkiplistMapNode[level];
 	}
-	
+
 	/**
 	 * Returns a string representation of a single node, through its key and value.
 	 * 
@@ -47,5 +47,5 @@ public class SkiplistMapNode<K extends Comparable<K>,V> {
 	public String toString(){
 		return "\""+key+"\"\""+value+"\"";
 	}
-	
+
 }
