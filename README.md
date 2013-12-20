@@ -16,8 +16,7 @@ Index:
 
 1. assign2_stacksQueues: 
 
-        a. Linked-list implementation of a stack and a queue. Nodes are created in separate classes, respectively titled
-        "StackListNode.java" and "QueueListNode.java".
+        a. Linked-list implementation of a stack and a queue. Nodes are created in separate classes, respectively titled "StackListNode.java" and "QueueListNode.java".
         
         b. "BalanceCheck.java" uses the stack to ensure that provided strings are "balanced" (meaning that for every opening character stored in the hash-table within the file there is a closing character).
         
@@ -28,3 +27,8 @@ Index:
         
         b. An iterator, called through the main class's iterator() method, is constructed from "SkiplistMapIterator.java".
 
+3. assign6_graphs:
+  
+        a. "Graph.java" implements a basic directed graph with nodes and edges both having their own generic type. The public methods are findNode(), addNode(), getNodes(), addEdge() (overloaded), addBiEdge() and toString(). New nodes and edges are created through "Node.java" and "Edge.java".
+        
+        b. Dijkstra's Algorithm to find the shortest paths from a specified node to the rest of the nodes in a graph is implemented through "DijkstrasAlgorithm.java".
