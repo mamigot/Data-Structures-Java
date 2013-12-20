@@ -5,7 +5,7 @@ import java.util.List;
 public class QueueListNode<E> {
 	protected E value;
 	protected QueueListNode next;
-	
+
 	//Construct either a node with a link to the next element
 	//or one without it
 	public QueueListNode(E v, QueueListNode n) {
@@ -34,9 +34,9 @@ public class QueueListNode<E> {
 	//Iterate through the levels of nodes recursively
 	public String toString() {
 		if (next  == null) {
-		    return  " \"" + value + "\" ";
+			return  " \"" + value + "\" ";
 		} else {
-		    return  " \"" + value + "\" ;" + next.toString();
+			return  " \"" + value + "\" ;" + next.toString();
 		}
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 public class StackListNode<E> {
 	protected E value;
 	protected StackListNode next;
-	
+
 	//Construct either a node with a link to the next element
 	//or one without it
 	public StackListNode(E v, StackListNode n) {
@@ -20,10 +20,10 @@ public class StackListNode<E> {
 	//Iterate through the levels of nodes recursively
 	public String toString() {
 		if (next  == null) {
-		    return  " \"" + value + "\" ";
+			return  " \"" + value + "\" ";
 		} else {
-		    return  " \"" + value + "\" ;" + next.toString();
+			return  " \"" + value + "\" ;" + next.toString();
 		}
 	}
-	
+
 }

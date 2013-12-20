@@ -18,13 +18,13 @@
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 public interface Queue<E> extends Collection<E> {
-    // Basic operations
-    int size();
-    void enqueue(E element);
-    E dequeue() throws InvalidOperationException;    
-    boolean isEmpty();
+	// Basic operations
+	int size();
+	void enqueue(E element);
+	E dequeue() throws InvalidOperationException;    
+	boolean isEmpty();
 
-    // Output operations
-    String toString();
-    void PrettyPrint();
+	// Output operations
+	String toString();
+	void PrettyPrint();
 }

@@ -18,13 +18,13 @@
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 public interface Stack<E> extends Collection<E> {
-    // Basic operations
-    int size();
-    void push(E element);
-    E pop() throws InvalidOperationException;    
-    boolean isEmpty();
+	// Basic operations
+	int size();
+	void push(E element);
+	E pop() throws InvalidOperationException;    
+	boolean isEmpty();
 
-    // Output operations
-    String toString();
-    void PrettyPrint();
+	// Output operations
+	String toString();
+	void PrettyPrint();
 }
