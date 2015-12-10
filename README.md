@@ -1,3 +1,6 @@
+*Inactive / useless. This repository is just a relic from the good old days.*
+
+
 Object-Oriented Data Structures
 ===============================
  
